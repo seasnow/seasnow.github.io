@@ -1,24 +1,48 @@
-<html>
-<head>
-   <title></title>
-   <meta charset='utf-8' />
-</head>
-<style type='text/css'>
-  #div1{
-       font-size:36px;
-       margin:0 auto;
-     text-align:center;
-       color:red;
-  }
-</style>
-<script src="http://api.map.baidu.com/api?V=1.3"></script>
-<script>
-window.onload=function(){
-    
-}
-</script>
-<body>
-  <div id='div1'>Hello World!</div>
-</body>
+<!DOCTYPE html>  
+<html>  
+<head>  
 
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=eg2vs4u3S1dhy8bTfOq2eUwqGkwKwE3Y"></script>
+<script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>
+<title></title>  
+<style>
+    html,body,#map{width:100%;height: 100%;}
+	#map{margin-top:5px;}
+</style>
+<script type="text/javascript">  
+function initialize(addr) {  
+  var mp = new BMap.Map('map'); 
+  var nowCity=new BMap.LocalCity(); 
+  mp.centerAndZoom(addr || "北京",12);  
+  mp.enableScrollWheelZoom(true);
+
+  var mapType1=new BMap.MapTypeControl({mapTypes:[BMAP_NORMAL_MAP,BMAP_HYBRID_MAP]});
+  var mapType2=new BMap.MapTypeControl({anchor:BMAP_ANCHOR_TOP_LEFT});
+  var overView=new BMap.OverviewMapControl();
+  var overViewOpen=new BMap.OverviewMapControl({isOpen:true,anchor:BMAP_ANCHOR_BOTTOM_RIGHT});
+  mp.addControl(mapType1);
+  mp.addControl(mapType2);
+  mp.setCurrentCity("北京");
+  mp.addControl(overView);
+  mp.addControl(overViewOpen);
+}  
+ 
+window.onload = function(){
+    initialize();
+    var seach=document.getElementById("btn");
+    seach.onclick=function(){
+        var seachval=document.getElementById("sVal").value;
+        initialize(seachval);
+    }
+} 
+
+</script>  
+</head>  
+<body>  
+  <input type="text" id="sVal">
+  <input type="button" id="btn" value="搜索">
+  <div id="map"></div>  
+</body>   
 </html>
